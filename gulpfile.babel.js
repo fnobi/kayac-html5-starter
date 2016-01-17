@@ -5,9 +5,6 @@ import gulp from 'gulp';
 import source from 'vinyl-source-stream';
 import sass from 'gulp-sass';
 import pleeease from 'gulp-pleeease';
-import browserify from 'browserify';
-import babelify from 'babelify';
-import debowerify from 'debowerify';
 import jade from 'gulp-jade';
 import browserSync from 'browser-sync';
 
@@ -36,16 +33,7 @@ gulp.task('copy-bower', () => {
     }).pipe(gulp.dest(`${DEST}/js/lib`));
 });
 
-gulp.task('browserify', () => {
-    return browserify(`${SRC}/js/script.js`)
-        .transform(babelify)
-        .transform(debowerify)
-        .bundle()
-        .pipe(source('script.js'))
-        .pipe(gulp.dest(`${DEST}/js`));
-});
-
-gulp.task('js', gulp.parallel('browserify', 'copy-bower'));
+gulp.task('js', gulp.parallel('copy-bower'));
 
 
 // html
@@ -72,7 +60,6 @@ gulp.task('browser-sync', () => {
     });
 
     gulp.watch([`${SRC}/scss/**/*.scss`], gulp.series('sass', browserSync.reload));
-    gulp.watch([`${SRC}/js/**/*.js`], gulp.series('browserify', browserSync.reload));
     gulp.watch([`${SRC}/jade/**/*.jade`], gulp.series('jade', browserSync.reload));
 });
 
