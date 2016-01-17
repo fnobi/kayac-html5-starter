@@ -1,9 +1,5 @@
 {
   "name": "kayac-html5-starter",
-  "homepage": "https://github.com/kayac/kayac-html5-starter",
-  "authors": [
-    "fujisawa-shin <fujisawa-shin@kayac.com>"
-  ],
   "description": "kayac-html5-starter development.",
   "main": "gulpfile.js",
   "moduleType": [],
@@ -18,7 +14,7 @@
   ],
   "devDependencies": {
     "reset-css": "2.0.*",
-    "jquery": "1.*",
+    "jquery": "2.*",
     "html5shiv": "3.7.*"
   }
 }
