@@ -10,6 +10,7 @@ import babelify from 'babelify';
 import debowerify from 'debowerify';
 import jade from 'gulp-jade';
 import browserSync from 'browser-sync';
+import awspublish from "gulp-awspublish";
 
 
 // const
@@ -77,6 +78,21 @@ gulp.task('browser-sync', () => {
 });
 
 gulp.task('serve', gulp.series('browser-sync'));
+
+
+// publish
+gulp.task('awspublish', () => {
+    const config = require(`${CONFIG}/aws-credentials.json`);
+    const publisher = awspublish.create(config);
+    
+    return gulp.src(`${DEST}/**/*`)
+        .pipe(publisher.publish())
+        .pipe(publisher.sync())
+        .pipe(awspublish.reporter({
+            states: ['create', 'update', 'delete']
+        }));
+});
+gulp.task('publish', gulp.series('awspublish'));
 
 
 // default
