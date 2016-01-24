@@ -1,0 +1,10 @@
+{
+    "serviceAccount": "...",
+    "sheetKey": "...",
+    "sheetTitle": "...",
+    "keyFilePath": "src/config/google-key-file.json",
+    "columns": {
+        "title": "タイトル",
+        "name": "名前"
+    }
+}

@@ -10,6 +10,8 @@ import babelify from 'babelify';
 import debowerify from 'debowerify';
 import jade from 'gulp-jade';
 import browserSync from 'browser-sync';
+import SheetLoader from "sheet-loader";
+
 
 
 // const
@@ -77,6 +79,21 @@ gulp.task('browser-sync', () => {
 });
 
 gulp.task('serve', gulp.series('browser-sync'));
+
+
+// load-sheet
+gulp.task('load-sheet', (cb) => {
+    const config = require(`${CONFIG}/sheet-loader.json`);
+    const sheetLoader = new SheetLoader(config);
+
+    sheetLoader.load((err, rows, labels) => {
+        require('fs').writeFile(
+            `${DEST}/rows.json`,
+            JSON.stringify(rows),
+            cb
+        );
+    });
+});
 
 
 // default
