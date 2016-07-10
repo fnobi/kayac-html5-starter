@@ -1,5 +1,13 @@
 riot.mount('content', 'todo', {
     title: 'Hello Riot!',
-    list: [ 'fnobi', 'kayac', 'hoge', 'moge' ]
+    list: [{
+        name: 'fnobi'
+    },{
+        name: 'kayac'
+    },{
+        name: 'hoge'
+    },{
+        name: 'moge'
+    }]
 });
 
