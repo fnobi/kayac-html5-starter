@@ -2,7 +2,7 @@ kayac-html5-starter
 ====
 
 ## 事前に用意するもの
-- node.js (version 4.0.0以上)
+- node.js (version 5.0.0以上)
 
 ## 環境構築
 ```
@@ -22,7 +22,7 @@ npm install
   - gulpタスクに関する設定ファイルです。（`.babel.js`となっているのは、es2015で書くための印です）
 - `public`
   - Web公開されるファイルの置き場所です。 (gulpタスク実行までは空の状態です)
-- `src/scss`, `src/js`, `src/jade`, `src/config`
+- `src/scss`, `src/js`, `src/pug`, `src/config`
   - ビルドに必要な各種ソースコードです。
 
 ## 開発手順
@@ -36,7 +36,7 @@ shellから以下のコマンドを実行することで、各種ビルド・タ
 
 ## 使用言語
 
-- HTMLテンプレート: [jade](http://jade-lang.com/)
+- HTMLテンプレート: [pug](http://jade-lang.com/)
 - CSSメタ言語: [Sass(scss)](http://sass-lang.com/)
 - Javascript: [ES2015(ECMAScript 6)](https://babeljs.io/docs/learn-es2015/)
 
