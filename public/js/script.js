@@ -11,3 +11,5 @@ riot.mount('content', 'todo', {
     }]
 });
 
+// TODO: router
+// TODO: このjs自体無い方がスマートな気がする
