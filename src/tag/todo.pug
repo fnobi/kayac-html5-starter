@@ -1,7 +1,8 @@
 todo
   h3 { title }
   ul
-    li(each="{ opts.list }") { name }
+    li(each="{ list }") { name }
 
   script.
     this.title = opts.title;
+    this.list = opts.list;
