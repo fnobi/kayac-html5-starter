@@ -4,9 +4,6 @@
 import gulp from 'gulp';
 import sass from 'gulp-sass';
 import pleeease from 'gulp-pleeease';
-import browserify from 'browserify';
-import babelify from 'babelify';
-import debowerify from 'debowerify';
 import pug from 'gulp-pug';
 import browserSync from 'browser-sync';
 import readConfig from 'read-config';
@@ -34,28 +31,6 @@ gulp.task('sass', () => {
 gulp.task('css', gulp.series('sass'));
 
 
-// js
-gulp.task('copy-bower', () => {
-    const config = readConfig(`${CONFIG}/copy-bower.json`);
-    return gulp.src(config.src, {
-        cwd: 'bower_components'
-    }).pipe(gulp.dest(`${DEST}/js/lib`));
-});
-
-gulp.task('browserify', () => {
-    return gulp.src(`${SRC}/js/kayacHtml5Starter*`)
-        .pipe(transform((file) => {
-            return browserify(file.path)
-                .transform(babelify)
-                .transform(debowerify)
-                .bundle();
-        }))
-        .pipe(gulp.dest(`${DEST}/js`));
-});
-
-gulp.task('js', gulp.parallel('browserify', 'copy-bower'));
-
-
 // html
 gulp.task('pug', () => {
     const locals = readConfig(`${CONFIG}/meta.json`);
@@ -80,7 +55,6 @@ gulp.task('browser-sync', () => {
     });
 
     watch([`${SRC}/scss/**/*.scss`], gulp.series('sass', browserSync.reload));
-    watch([`${SRC}/js/**/*.js`], gulp.series('browserify', browserSync.reload));
     watch([
         `${SRC}/pug/**/*.pug`,
         `${SRC}/config/meta.json`
@@ -90,17 +64,6 @@ gulp.task('browser-sync', () => {
 gulp.task('serve', gulp.series('browser-sync'));
 
 
-// test
-gulp.task('eslint', () => {
-    return gulp.src(`${SRC}/js/**/*.js`)
-        .pipe(eslint({ useEslintrc: true }))
-        .pipe(eslint.format())
-        .pipe(eslint.failAfterError());
-});
-
-gulp.task('test', gulp.parallel('eslint'));
-
-
 // default
-gulp.task('build', gulp.parallel('css', 'js', 'html'));
+gulp.task('build', gulp.parallel('css', 'html'));
 gulp.task('default', gulp.series('build', 'serve'));
