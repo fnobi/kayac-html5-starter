@@ -1,8 +1,12 @@
 todo
   h3 { title }
   ul
-    li(each="{ list }") { name }
+    li(each="{ list }" onclick="{ say }") { name }
 
   script.
     this.title = opts.title;
     this.list = opts.list;
+    
+    this.say = function (e) {
+      alert(e.item.name);
+    };
