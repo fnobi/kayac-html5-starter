@@ -5,7 +5,9 @@ prepend ConfigBlock
 
 //- append StylesheetBlock
 
-//- append JavascriptBlock
+prepend JavascriptBlock
+  script(src="tag/todo.tag", type="riot/tag")
 
 block ContentBlock
-  | hello, world!
+  content
+  

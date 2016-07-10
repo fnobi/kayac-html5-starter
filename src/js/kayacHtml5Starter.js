@@ -1,10 +1,5 @@
-import Sample from './lib/Sample';
-import $ from 'jquery';
-
-const sample = new Sample({
-    name: 'world'
+riot.mount('content', 'todo', {
+    title: 'Hello Riot!',
+    list: [ 'fnobi', 'kayac', 'hoge', 'moge' ]
 });
 
-$('.wrapper').on('click', () => {
-    console.log(`hello, ${sample.name}.`);
-});
