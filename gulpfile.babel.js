@@ -8,7 +8,7 @@ import pug from 'gulp-pug';
 import browserSync from 'browser-sync';
 import readConfig from 'read-config';
 import watch from 'gulp-watch';
-import eslint from 'gulp-eslint';
+import riot from 'gulp-riot';
 
 import transform from './lib/vinyl-transform';
 
@@ -46,6 +46,14 @@ gulp.task('pug', () => {
 gulp.task('html', gulp.series('pug'));
 
 
+// riot
+gulp.task('riot', () => {
+    return gulp.src(`${SRC}/tag/*.pug`)
+        .pipe(riot({ template: 'pug' }))
+        .pipe(gulp.dest(`${DEST}/js/tag/`));
+});
+
+
 // serve
 gulp.task('browser-sync', () => {
     browserSync({
@@ -59,11 +67,12 @@ gulp.task('browser-sync', () => {
         `${SRC}/pug/**/*.pug`,
         `${SRC}/config/meta.json`
     ], gulp.series('pug', browserSync.reload));
+    watch([`${SRC}/tag/**/*.pug`], gulp.series('riot', browserSync.reload));
 });
 
 gulp.task('serve', gulp.series('browser-sync'));
 
 
 // default
-gulp.task('build', gulp.parallel('css', 'html'));
+gulp.task('build', gulp.parallel('css', 'html', 'riot'));
 gulp.task('default', gulp.series('build', 'serve'));

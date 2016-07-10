@@ -14,7 +14,8 @@
     "serve": "gulp serve",
     "build": "gulp build",
     "build-css": "gulp css",
-    "build-html": "gulp html"
+    "build-html": "gulp html",
+    "build-riot": "gulp riot"
   },
   "keywords": [
     "gulp"
@@ -27,14 +28,21 @@
     "gulp-eslint": "2.0.*",
     "gulp-pleeease": "2.0.*",
     "gulp-pug": "^3.0.3",
+    "gulp-riot": "^0.5.2",
     "gulp-sass": "2.1.*",
     "gulp-watch": "^4.3.8",
     "jquery": "2.*",
+    "pug": "^2.0.0-beta3",
     "read-config": "2.0.*",
     "riot": "^2.5.0",
     "through2": "2.0.*"
   },
   "dependencies": {
     "bower": "1.7.*"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   }
 }
