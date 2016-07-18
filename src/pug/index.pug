@@ -6,5 +6,23 @@ prepend ConfigBlock
 //- append StylesheetBlock
 
 block ContentBlock
+  .header
+    h1 riot demo
   content
+
+append JavascriptBlock
+  script.
+    riot.mount('content', 'todo', {
+      title: 'Hello Riot!',
+      list: [{
+          name: 'fnobi'
+      },{
+          name: 'kayac'
+      },{
+          name: 'hoge'
+      },{
+          name: 'moge'
+      }]
+    });
   
+    // TODO: router

@@ -2,7 +2,7 @@ todo
   h3 { title }
   ul
     li(each="{ list }" onclick="{ say }") { name }
-
+    
   script.
     this.title = opts.title;
     this.list = opts.list;
@@ -10,3 +10,8 @@ todo
     this.say = function (e) {
       alert(e.item.name);
     };
+    
+  style(type="text/scoped-css").
+    h3 {
+      font-weight: bold;
+    }    
