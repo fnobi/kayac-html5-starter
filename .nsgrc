@@ -1,0 +1,8 @@
+{
+    "primary": ["start"],
+    "exclude": ["postinstall", "install-bower", "nsg"],
+    "theme": "dark",
+    "hotkeys": {
+        "Command+r": "start"
+    }
+}
