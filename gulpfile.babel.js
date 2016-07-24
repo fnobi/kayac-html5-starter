@@ -9,6 +9,8 @@ import browserSync from 'browser-sync';
 import readConfig from 'read-config';
 import watch from 'gulp-watch';
 import riot from 'gulp-riot';
+import concat from "gulp-concat";
+
 
 import transform from './lib/vinyl-transform';
 
@@ -54,7 +56,8 @@ gulp.task('riot', () => {
             template: 'pug',
             type: 'es6'
         }))
-        .pipe(gulp.dest(`${DEST}/js/tag/`));
+        .pipe(concat('tag.js'))
+        .pipe(gulp.dest(`${DEST}/js/`));
 });
 
 
