@@ -20,12 +20,16 @@ append JavascriptBlock
     });
 
     riot.route('', function () {
-      console.log('route to todo');
       riot.mount('main', 'todo');
     });
     
+    riot.route('todo/*', function (id) {
+      riot.mount('main', 'detail', {
+        id: id
+      });
+    });
+    
     riot.route('another', function () {
-      console.log('route to another');
       riot.mount('main', 'another');
     });
     

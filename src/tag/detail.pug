@@ -1,0 +1,30 @@
+detail
+  h2 todo: { name }
+  
+  section
+    h3 作成日: 
+    p { date }
+  
+  section
+    h3 詳細: 
+    textarea(rows=10 cols=100 onchange="{ saveDescription }") { description }
+  
+  script(type="es6").
+    const item = todoList.find(opts.id);
+    this.name = item.name;
+    this.description = item.description;
+    this.date = item.date || "（不明）";
+    
+  style(type="text/scoped-css").
+    :scope {
+      padding: 1em;
+    }
+  
+    :scope h2 {
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+    
+    :scope section {
+      margin: 1em 0em;
+    }    

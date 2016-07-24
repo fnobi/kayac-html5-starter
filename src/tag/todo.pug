@@ -3,38 +3,27 @@ todo
   ul
     li(each="{ list }" onclick="{ say }")
       input(type="checkbox" onchange="{ checkList }")
-      | { name }
+      a(href="#todo/{ id }") { name }
+
   button(onclick="{ addList }") add
 
   script(type="es6").
-    const STORAGE_KEY = 'todolist';
-  
-    const getList = () => {
-      var storage = localStorage.getItem(STORAGE_KEY);
-      return storage ? JSON.parse(storage) : [];
-    };
-    
-    const saveList = () => {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.list));
-    };
-    
     const reduceList = (id) => {
-      const newList = [];
-      this.list.forEach((item) => {
-        (item.id != id) ? newList.push(item) : null;
-      });
-      this.list = newList;
-      saveList();
+        const newList = [];
+        this.list.forEach((item) => {
+            if (item.id != id) {
+                newList.push(item);
+            }
+        });
+        this.list = newList;
+        todoList.saveList(newList);
     };
   
-    this.list = getList();
+    this.list = todoList.getList();
     
     this.addList = () => {
-      this.list.push({
-        id: Date.now(),
-        name: prompt('タスクの名前を入れましょう')
-      });
-      saveList();
+      todoList.add(prompt('タスクの名前を入れましょう'));
+      this.list = todoList.getList();
     };
     
     this.checkList = (e) => {
@@ -50,4 +39,4 @@ todo
     :scope h2 {
       font-weight: bold;
       margin-bottom: 0.5em;
-    }    
+    }
