@@ -10,10 +10,10 @@
     "postinstall": "npm run install-bower",
     "install-bower": "bower install",
     "start": "gulp",
-    "test": "gulp test",
     "serve": "gulp serve",
     "build": "gulp build",
     "build-css": "gulp css",
+    "build-js": "gulp js",
     "build-html": "gulp html",
     "build-riot": "gulp riot"
   },
@@ -44,12 +44,12 @@
     "through2": "2.0.*",
     "vinyl-source-stream": "1.1.*"
   },
-  "dependencies": {
-    "bower": "1.7.*"
-  },
   "babel": {
     "presets": [
       "es2015"
     ]
+  },
+  "dependencies": {
+    "bower": "1.7.*"
   }
 }
