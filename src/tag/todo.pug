@@ -1,5 +1,5 @@
 todo
-  h2 todo
+  page-title(title="todo")
   ul
     li(each="{ list }" onclick="{ say }")
       input(type="checkbox" onchange="{ checkList }")
@@ -30,9 +30,4 @@ todo
   style(type="text/scoped-css").
     :scope {
       padding: 1em;
-    }
-  
-    :scope h2 {
-      font-weight: bold;
-      margin-bottom: 0.5em;
     }
