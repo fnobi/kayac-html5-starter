@@ -6,14 +6,27 @@ prepend ConfigBlock
 //- append StylesheetBlock
 
 block ContentBlock
-  .header
-    h1 riot demo
-  content
+  header(riot-tag="gheader")
+  main
 
 append JavascriptBlock
   script.
+    // gheader
+    riot.mount('gheader');
+
+    // main
     riot.route(function (tagName) {
-      riot.mount('content', tagName || 'todo');
+      console.log(tagName);
+    });
+
+    riot.route('', function () {
+      console.log('route to todo');
+      riot.mount('main', 'todo');
+    });
+    
+    riot.route('another', function () {
+      console.log('route to another');
+      riot.mount('main', 'another');
     });
     
     riot.route.start(true);
