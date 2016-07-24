@@ -49,7 +49,11 @@ gulp.task('html', gulp.series('pug'));
 // riot
 gulp.task('riot', () => {
     return gulp.src(`${SRC}/tag/*.pug`)
-        .pipe(riot({ template: 'pug' }))
+        .pipe(riot({
+            compact: true,
+            template: 'pug',
+            type: 'es6'
+        }))
         .pipe(gulp.dest(`${DEST}/js/tag/`));
 });
 
