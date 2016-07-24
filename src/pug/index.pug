@@ -12,17 +12,8 @@ block ContentBlock
 
 append JavascriptBlock
   script.
-    riot.mount('content', 'todo', {
-      title: 'Hello Riot!',
-      list: [{
-          name: 'fnobi'
-      },{
-          name: 'kayac'
-      },{
-          name: 'hoge'
-      },{
-          name: 'moge'
-      }]
+    riot.route(function (tagName) {
+      riot.mount('content', tagName || 'todo');
     });
-  
-    // TODO: router
+    
+    riot.route.start(true);

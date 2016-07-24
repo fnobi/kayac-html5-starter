@@ -2,10 +2,19 @@ todo
   h3 { title }
   ul
     li(each="{ list }" onclick="{ say }") { name }
-    
+  a(href="#another") another
+  
   script.
-    this.title = opts.title;
-    this.list = opts.list;
+    this.title = 'Hello Riot!';
+    this.list = [{
+      name: 'fnobi'
+    },{
+      name: 'kayac'
+    },{
+      name: 'hoge'
+    },{
+      name: 'moge'
+    }];
     
     this.say = function (e) {
       alert(e.item.name);
