@@ -8,26 +8,20 @@ todo
   button(onclick="{ addList }") add
 
   script(type="es6").
-    const reduceList = (id) => {
-        const newList = [];
-        this.list.forEach((item) => {
-            if (item.id != id) {
-                newList.push(item);
-            }
-        });
-        this.list = newList;
-        todoList.saveList(newList);
-    };
-  
-    this.list = todoList.getList();
+    const todoList = new TodoList();
     
+    this.list = todoList.list;
+    
+    todoList.on('change', (list) => {
+      this.list = list;
+    });
+  
     this.addList = () => {
       todoList.add(prompt('タスクの名前を入れましょう'));
-      this.list = todoList.getList();
     };
     
     this.checkList = (e) => {
-      reduceList(e.item.id);
+      todoList.reduce(e.item.id);
     };
     
     

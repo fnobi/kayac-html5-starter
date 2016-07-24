@@ -1,5 +1,9 @@
 detail
-  h2 todo: { name }
+  h2 todo
+  
+  section
+    h3 件名:
+    p: input(type="text" value="{ name }" onchange="{ saveName }")
   
   section
     h3 作成日: 
@@ -10,10 +14,23 @@ detail
     textarea(rows=10 cols=100 onchange="{ saveDescription }") { description }
   
   script(type="es6").
-    const item = todoList.find(opts.id);
+    const id = opts.id;
+    const todoList = new TodoList();
+    const item = todoList.find(id);
+    
     this.name = item.name;
     this.description = item.description;
     this.date = item.date || "（不明）";
+    
+    this.saveName = (e) => {
+      item.name = e.target.value;
+      todoList.saveItem(id, item);
+    };
+    
+    this.saveDescription = (e) => {
+      item.description = e.target.value;
+      todoList.saveItem(id, item);
+    };
     
   style(type="text/scoped-css").
     :scope {
