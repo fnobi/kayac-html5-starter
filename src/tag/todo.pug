@@ -17,7 +17,9 @@ todo
     });
   
     this.addList = () => {
-      todoList.add(prompt('タスクの名前を入れましょう'));
+      todoList.add({
+        name: prompt('タスクの名前を入れましょう')
+      });
     };
     
     this.checkList = (e) => {

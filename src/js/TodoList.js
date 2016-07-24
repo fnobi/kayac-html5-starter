@@ -28,12 +28,11 @@ export default class TodoList extends EventEmitter {
         return matched;
     }
 
-    add (name) {
-        this.list.push({
-            id: Date.now(),
-            date: new Date(),
-            name: name
-        });
+    add (item) {
+        item.id = Date.now();
+        item.date = item.date || new Date();
+        
+        this.list.push(item);
         this.saveList();
     }
 
