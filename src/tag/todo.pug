@@ -1,23 +1,46 @@
 todo
   h2 todo
   ul
-    li(each="{ list }" onclick="{ say }") { name }
-  a(href="#another") another
+    li(each="{ list }" onclick="{ say }")
+      input(type="checkbox" onchange="{ checkList }")
+      | { name }
+  button(onclick="{ addList }") add
 
   script(type="es6").
-    this.list = [{
-      name: 'fnobi'
-    },{
-      name: 'kayac'
-    },{
-      name: 'hoge'
-    },{
-      name: 'moge'
-    }];
-    
-    this.say = function (e) {
-      alert(e.item.name);
+    const STORAGE_KEY = 'todolist';
+  
+    const getList = () => {
+      var storage = localStorage.getItem(STORAGE_KEY);
+      return storage ? JSON.parse(storage) : [];
     };
+    
+    const saveList = () => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.list));
+    };
+    
+    const reduceList = (id) => {
+      const newList = [];
+      this.list.forEach((item) => {
+        (item.id != id) ? newList.push(item) : null;
+      });
+      this.list = newList;
+      saveList();
+    };
+  
+    this.list = getList();
+    
+    this.addList = () => {
+      this.list.push({
+        id: Date.now(),
+        name: prompt('タスクの名前を入れましょう')
+      });
+      saveList();
+    };
+    
+    this.checkList = (e) => {
+      reduceList(e.item.id);
+    };
+    
     
   style(type="text/scoped-css").
     :scope {
