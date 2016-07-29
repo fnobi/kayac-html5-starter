@@ -92,8 +92,12 @@ gulp.task('awspublish', () => {
     const config = require(`${CONFIG}/aws-credentials.json`);
     const publisher = awspublish.create(config);
     
+    const headers = {
+        'Cache-Control': 'no-cache'
+    };
+    
     return gulp.src(`${DEST}/**/*`)
-        .pipe(publisher.publish())
+        .pipe(publisher.publish(headers))
         .pipe(publisher.sync())
         .pipe(awspublish.reporter({
             states: ['create', 'update', 'delete']
