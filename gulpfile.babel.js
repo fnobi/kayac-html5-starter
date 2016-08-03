@@ -6,14 +6,13 @@ import source from 'vinyl-source-stream';
 import sass from 'gulp-sass';
 import pleeease from 'gulp-pleeease';
 import browserify from 'browserify';
+import riotify from "riotify";
 import babelify from 'babelify';
 import debowerify from 'debowerify';
 import pug from 'gulp-pug';
 import browserSync from 'browser-sync';
 import readConfig from 'read-config';
 import watch from 'gulp-watch';
-import riot from 'gulp-riot';
-import concat from "gulp-concat";
 
 
 // const
@@ -44,8 +43,12 @@ gulp.task('copy-bower', () => {
 
 gulp.task('browserify', () => {
     return browserify(`${SRC}/js/script.js`)
-        .transform(babelify)
-        .transform(debowerify)
+        .transform(riotify, {
+            template: 'pug',
+            type: 'babel'
+        })
+        // .transform(babelify)
+        // .transform(debowerify)
         .bundle()
         .pipe(source('script.js'))
         .pipe(gulp.dest(`${DEST}/js`));
@@ -91,17 +94,16 @@ gulp.task('browser-sync', () => {
     });
 
     watch([`${SRC}/scss/**/*.scss`], gulp.series('sass', browserSync.reload));
-    watch([`${SRC}/js/**/*.js`], gulp.series('browserify', browserSync.reload));
+    watch([`${SRC}/js/**/*.{js|tag}`], gulp.series('browserify', browserSync.reload));
     watch([
         `${SRC}/pug/**/*.pug`,
         `${SRC}/config/meta.json`
     ], gulp.series('pug', browserSync.reload));
-    watch([`${SRC}/tag/**/*.pug`], gulp.series('riot', browserSync.reload));
 });
 
 gulp.task('serve', gulp.series('browser-sync'));
 
 
 // default
-gulp.task('build', gulp.parallel('css', 'js', 'html', 'riot'));
+gulp.task('build', gulp.parallel('css', 'js', 'html'));
 gulp.task('default', gulp.series('build', 'serve'));

@@ -1,8 +1,10 @@
-import EventEmitter from 'events';
+// import EventEmitter from 'events';
+const EventEmitter = require('events').EventEmitter;
 
 const STORAGE_KEY = 'todolist';
 
-export default class TodoList extends EventEmitter {
+// export default class TodoList extends EventEmitter {
+class TodoList extends EventEmitter {
     constructor (opts = {}) {
         super();
         
@@ -56,3 +58,5 @@ export default class TodoList extends EventEmitter {
         this.saveList();
     }
 };
+
+module.exports = TodoList;

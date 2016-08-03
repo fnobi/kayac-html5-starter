@@ -8,6 +8,8 @@ todo
   button(onclick="{ addList }") add
 
   script(type="es6").
+    const TodoList = require('../TodoList');
+    
     const todoList = new TodoList();
     
     this.list = todoList.list;

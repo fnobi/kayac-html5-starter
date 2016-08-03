@@ -8,25 +8,3 @@ prepend ConfigBlock
 block ContentBlock
   header(riot-tag="gheader")
   main
-
-append JavascriptBlock
-  script.
-    // gheader
-    riot.mount('gheader');
-
-    // main
-    riot.route(function (tagName) {
-      console.log(tagName);
-    });
-
-    riot.route('', function () {
-      riot.mount('main', 'todo');
-    });
-    
-    riot.route('todo/*', function (id) {
-      riot.mount('main', 'detail', {
-        id: id
-      });
-    });
-    
-    riot.route.start(true);
