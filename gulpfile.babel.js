@@ -32,15 +32,7 @@ gulp.task('sass', () => {
 
 gulp.task('css', gulp.series('sass'));
 
-
 // js
-gulp.task('copy-bower', () => {
-    const config = readConfig(`${CONFIG}/copy-bower.json`);
-    return gulp.src(config.src, {
-        cwd: 'bower_components'
-    }).pipe(gulp.dest(`${DEST}/js/lib`));
-});
-
 gulp.task('browserify', () => {
     return browserify(`${SRC}/js/script.js`)
         .transform(riotify, {
@@ -54,8 +46,7 @@ gulp.task('browserify', () => {
         .pipe(gulp.dest(`${DEST}/js`));
 });
 
-gulp.task('js', gulp.parallel('browserify', 'copy-bower'));
-
+gulp.task('js', gulp.parallel('browserify'));
 
 // html
 gulp.task('pug', () => {
