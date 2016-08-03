@@ -14,7 +14,7 @@ detail
     textarea(rows=10 cols=100 onchange="{ saveDescription }") { item.description }
   
   script(type="es6").
-    const TodoList = require('../TodoList');
+    const TodoList = require('../TodoList').default;
 
     const id = opts.id;
     const todoList = new TodoList();

@@ -39,8 +39,8 @@ gulp.task('browserify', () => {
             template: 'pug',
             type: 'babel'
         })
-        // .transform(babelify)
-        // .transform(debowerify)
+        .transform(babelify)
+        .transform(debowerify)
         .bundle()
         .pipe(source('script.js'))
         .pipe(gulp.dest(`${DEST}/js`));
@@ -61,19 +61,6 @@ gulp.task('pug', () => {
 });
 
 gulp.task('html', gulp.series('pug'));
-
-
-// riot
-gulp.task('riot', () => {
-    return gulp.src(`${SRC}/tag/*.pug`)
-        .pipe(riot({
-            compact: true,
-            template: 'pug',
-            type: 'es6'
-        }))
-        .pipe(concat('tag.js'))
-        .pipe(gulp.dest(`${DEST}/js/`));
-});
 
 
 // serve

@@ -8,7 +8,7 @@ todo
   button(onclick="{ addList }") add
 
   script(type="es6").
-    const TodoList = require('../TodoList');
+    const TodoList = require('../TodoList').default;
     
     const todoList = new TodoList();
     

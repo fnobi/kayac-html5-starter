@@ -1,5 +1,6 @@
-const riot = require('riot');
+import riot from "riot";
 
+// riot tags
 require('./tags/gheader.tag');
 require('./tags/page-title.tag');
 require('./tags/todo.tag');
