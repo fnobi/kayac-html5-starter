@@ -6,14 +6,10 @@ require('./tags/page-title.tag');
 require('./tags/todo.tag');
 require('./tags/detail.tag');
 
-// gheader
+// mount: gheader
 riot.mount('gheader');
 
-// main
-riot.route(function (tagName) {
-    console.log(tagName);
-});
-
+// mount: main
 riot.route('', function () {
     riot.mount('main', 'todo');
 });
