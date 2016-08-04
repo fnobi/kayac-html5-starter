@@ -36,6 +36,7 @@ gulp.task('css', gulp.series('sass'));
 gulp.task('browserify', () => {
     return browserify(`${SRC}/js/script.js`)
         .transform(riotify, {
+            compact: true,
             template: 'pug',
             type: 'babel'
         })
