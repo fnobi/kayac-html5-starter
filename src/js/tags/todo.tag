@@ -4,8 +4,7 @@ todo
     li(each="{ list }" onclick="{ say }")
       input(type="checkbox" onchange="{ checkList }")
       a(href="#todo/{ id }") { name }
-
-  button(onclick="{ addList }") add
+  add-button
 
   script(type="es6").
     const TodoList = require('../TodoList').default;
@@ -16,13 +15,14 @@ todo
     
     todoList.on('change', (list) => {
       this.list = list;
+      this.update();
     });
-  
-    this.addList = () => {
+    
+    this.tags['add-button'].on('addClick', () => {
       todoList.add({
         name: prompt('タスクの名前を入れましょう')
       });
-    };
+    });
     
     this.checkList = (e) => {
       todoList.reduce(e.item.id);

@@ -4,6 +4,7 @@ import riot from "riot";
 require('./tags/gheader.tag');
 require('./tags/page-title.tag');
 require('./tags/todo.tag');
+require('./tags/add-button.tag');
 require('./tags/detail.tag');
 
 // mount: gheader
