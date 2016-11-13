@@ -3,9 +3,9 @@
   
   <style type="text/scoped-css">
     h1 {
-      background-color: #888;
-      color: #fff;
-      padding: 1em;  
+        background-color: #888;
+        color: #fff;
+        padding: 1em;  
     }
   </style>
 </gheader>

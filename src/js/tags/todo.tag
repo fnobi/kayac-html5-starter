@@ -17,24 +17,24 @@
     this.list = todoList.list;
     
     todoList.on('change', (list) => {
-      this.list = list;
-      this.update();
+        this.list = list;
+        this.update();
     });
     
     this.tags['add-button'].on('addClick', () => {
-      todoList.add({
-        name: prompt('タスクの名前を入れましょう')
-      });
+        todoList.add({
+            name: prompt('タスクの名前を入れましょう')
+        });
     });
     
     this.checkList = (e) => {
-      todoList.reduce(e.item.id);
+        todoList.reduce(e.item.id);
     };
   </script>    
     
   <style type="text/scoped-css">
     :scope {
-      padding: 1em;
+        padding: 1em;
     }
   </style>
 </todo>

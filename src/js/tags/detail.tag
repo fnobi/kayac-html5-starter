@@ -27,23 +27,23 @@
     this.item.date = this.item.date || "（不明）";
     
     this.saveName = (e) => {
-      this.item.name = e.target.value;
-      todoList.saveItem(id, this.item);
+        this.item.name = e.target.value;
+        todoList.saveItem(id, this.item);
     };
     
     this.saveDescription = (e) => {
-      this.item.description = e.target.value;
-      todoList.saveItem(id, this.item);
+        this.item.description = e.target.value;
+        todoList.saveItem(id, this.item);
     };
   </script>
     
   <style type="text/scoped-css">
     :scope {
-      padding: 1em;
+        padding: 1em;
     }
   
     :scope section {
-      margin: 1em 0em;
+        margin: 1em 0em;
     }
   </style>
 </detail>
