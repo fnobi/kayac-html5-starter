@@ -18,7 +18,9 @@ import watch from 'gulp-watch';
 // const
 const SRC = './src';
 const CONFIG = './src/config';
-const DEST = './public';
+const HTDOCS = './public';
+const BASE_PATH = '/';
+const DEST = `${HTDOCS}${BASE_PATH}`;
 
 
 // css
@@ -51,9 +53,9 @@ gulp.task('js', gulp.parallel('browserify'));
 
 // html
 gulp.task('pug', () => {
-    const locals = readConfig(`${CONFIG}/meta.json`);
+    const locals = readConfig(`${CONFIG}/meta.yml`);
 
-    return gulp.src(`${SRC}/pug/*.pug`)
+    return gulp.src(`${SRC}/pug/**/[!_]*.pug`)
         .pipe(pug({
             locals: locals,
             pretty: true
@@ -68,15 +70,17 @@ gulp.task('html', gulp.series('pug'));
 gulp.task('browser-sync', () => {
     browserSync({
         server: {
-            baseDir: DEST
-        }
+            baseDir: HTDOCS
+        },
+        startPath: BASE_PATH,
+        ghostMode: false
     });
 
     watch([`${SRC}/scss/**/*.scss`], gulp.series('sass', browserSync.reload));
     watch([`${SRC}/js/**/*.{js|tag}`], gulp.series('browserify', browserSync.reload));
     watch([
         `${SRC}/pug/**/*.pug`,
-        `${SRC}/config/meta.json`
+        `${SRC}/config/meta.yml`
     ], gulp.series('pug', browserSync.reload));
 });
 
