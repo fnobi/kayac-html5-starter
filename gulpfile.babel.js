@@ -39,7 +39,6 @@ gulp.task('browserify', () => {
     return browserify(`${SRC}/js/script.js`)
         .transform(riotify, {
             compact: true,
-            template: 'pug',
             type: 'babel'
         })
         .transform(babelify)

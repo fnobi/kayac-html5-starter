@@ -1,19 +1,23 @@
-detail
-  page-title(title="todo detail: { item.name }")
+<detail>
+  <header riot-tag="page-title" title="todo detail: { item.name }" />
   
-  section
-    h3 件名:
-    p: input(type="text" value="{ item.name }" onchange="{ saveName }")
+  <section>
+    <h3>件名:</h3>
+    <p>
+      <input type="text" value="{ item.name }" onchange="{ saveName }"/>
+    </p>
+  </section>
+
+  <section>
+    <h3>作成日:</h3>
+    <p>{ item.date }</p>
+  </section>
   
-  section
-    h3 作成日:
-    p { item.date }
-  
-  section
-    h3 詳細:
-    textarea(rows=10 cols=100 onchange="{ saveDescription }") { item.description }
-  
-  script(type="es6").
+  <section></section>
+    <h3>詳細:</h3>
+    <textarea rows=10 cols=100 onchange="{ saveDescription }">{ item.description }</textarea>
+
+  <script type="es6">
     const TodoList = require('../TodoList').default;
 
     const id = opts.id;
@@ -31,12 +35,15 @@ detail
       this.item.description = e.target.value;
       todoList.saveItem(id, this.item);
     };
+  </script>
     
-  style(type="text/scoped-css").
+  <style type="text/scoped-css">
     :scope {
       padding: 1em;
     }
   
     :scope section {
       margin: 1em 0em;
-    }    
+    }
+  </style>
+</detail>
