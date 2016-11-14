@@ -1,7 +1,7 @@
 <todo>
   <header riot-tag="page-title" title="todo" />
   <ul>
-    <li each="{ list }" onclick="{ say }">
+    <li each="{ state.list }">
       <input type="checkbox" onchange="{ checkList }" />
       <a href="#todo/{ id }">{ name }</a>
     </li>
@@ -14,14 +14,16 @@
     
     const todoList = new TodoList();
     
-    this.list = todoList.list;
+    this.state = {
+        list: todoList.list
+    };
     
     todoList.on('change', (list) => {
-        this.list = list;
+        this.state.list = list;
         this.update();
     });
     
-    this.tags['add-button'].on('addClick', () => {
+    this.tags['add-button'].on('clickAdd', () => {
         todoList.add({
             name: prompt('タスクの名前を入れましょう')
         });

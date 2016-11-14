@@ -1,5 +1,5 @@
 <page-title>
-  <h2>{ title }</h2>
+  <h2>{ state.title }</h2>
   
   <style type="text/scoped-css">
     :scope h2 {
@@ -9,6 +9,8 @@
   </style>
 
   <script type="es6">
-    this.title = opts.title
+    this.state = {
+        title: opts.title
+    };
   </script>
 </page-title>
