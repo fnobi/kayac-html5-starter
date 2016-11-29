@@ -4,7 +4,7 @@
   "description": "kayac-html5-starter development.",
   "main": "gulpfile.babel.js",
   "engines": {
-    "node": ">=5.0.0"
+    "node": ">=6.0.0"
   },
   "scripts": {
     "start": "gulp",

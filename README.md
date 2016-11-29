@@ -2,7 +2,7 @@ kayac-html5-starter
 ====
 
 ## 事前に用意するもの
-- node.js (version 5.0.0以上)
+- node.js (version 6.0.0以上)
 
 ## 環境構築
 ```
@@ -37,7 +37,7 @@ shellから以下のコマンドを実行することで、各種ビルド・タ
 
 ## 使用言語
 
-- HTMLテンプレート: [pug](http://jade-lang.com/)
+- HTMLテンプレート: [pug](https://pugjs.org/)
 - CSSメタ言語: [Sass(scss)](http://sass-lang.com/)
 - Javascript: [ES2015(ECMAScript 6)](https://babeljs.io/docs/learn-es2015/)
 
@@ -58,3 +58,4 @@ shellから以下のコマンドを実行することで、各種ビルド・タ
 - [browser-sync](https://www.browsersync.io/)
 - [jQuery](https://jquery.com/)
 - [Reset CSS](http://meyerweb.com/eric/tools/css/reset/)
+- [rev-logger](https://github.com/fnobi/rev-logger/)
