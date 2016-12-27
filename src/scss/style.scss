@@ -6,3 +6,10 @@
 
 // modules
 @import 'module/*';
+
+body {
+    $colorA: #f88;
+    $colorB: #ff8;
+    background: linear-gradient(90deg, $colorA, $colorA 50%, $colorB 50%, $colorB);
+    background-size: 50px 50px;
+}
