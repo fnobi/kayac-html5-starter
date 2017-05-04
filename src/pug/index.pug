@@ -8,4 +8,12 @@ prepend config-block
 //- append javascript-block
 
 block content-block
-  | hello, world!
+  .hero
+    - var row = 1
+    while row <= 4
+      - var col = 1
+      while col <= 6
+        .hero__item(data-row=row data-col=col)
+        - col++
+      - row++
+    .hero__title hello world!

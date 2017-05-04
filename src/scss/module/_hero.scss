@@ -1,0 +1,52 @@
+$row: 4;
+$col: 6;
+
+.hero {
+    position: relative;
+    // 縦横比6:4を守りながら、横幅合わせでリサイズ
+    padding-bottom: (100% * $row / $col);
+}
+
+.hero__item {
+    position: absolute;
+
+    width: (100% / $col);
+    height: (100% / $row);
+
+    @for $r from 0 through $row {
+        &[data-row="#{$r}"] {
+            top: (100% * ($r - 1) / $row);
+        }
+    }
+    @for $c from 0 through $col {
+        &[data-col="#{$c}"] {
+            left: (100% * ($c - 1) / $col);
+        }
+    }
+
+    // デモ用に彩色
+    &:nth-child(5n+1) {
+        background-color: red;
+    }
+    &:nth-child(5n+2) {
+        background-color: blue;
+    }
+    &:nth-child(5n+3) {
+        background-color: yellow;
+    }
+    &:nth-child(5n+4) {
+        background-color: green;
+    }
+    &:nth-child(5n+5) {
+        background-color: pink;
+    }
+}
+
+.hero__title {
+    position: absolute;
+    width: (100% * 2 / 6);
+    height: (100% * 2 / 4);
+    left: (100% * 2 / 6);
+    top: (100% * 1 / 4);
+    background-color: #fff;
+}
