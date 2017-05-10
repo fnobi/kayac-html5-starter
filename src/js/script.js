@@ -1,10 +1,11 @@
-import Sample from './lib/Sample';
-import $ from 'jquery';
+import pug from 'pug';
 
-const sample = new Sample({
-    name: 'world'
-});
+const dom = `
+.wrapper
+  .title= title
+  img(src="/images/sample.png")
+`;
 
-$('.wrapper').on('click', () => {
-    console.log(`hello, ${sample.name}.`);
-});
+const fn = pug.compile(dom);
+
+document.querySelector('.wrapper').innerHTML = fn({ title: 'タイトル' });
