@@ -11,6 +11,7 @@ import watchify from 'watchify';
 import browserify from 'browserify';
 import babelify from 'babelify';
 import pug from 'gulp-pug';
+import massProduction from 'gulp-mass-production';
 import browserSync from 'browser-sync';
 import readConfig from 'read-config';
 import watch from 'gulp-watch';
@@ -51,7 +52,7 @@ gulp.task('watchify', () => {
             gutil.log(err.message);
             gutil.log(err.codeFrame);
             this.emit('end');
-        })           
+        })
         .pipe(source('script.js'))
         .pipe(gulp.dest(`${DEST}/js`));
 });
@@ -63,10 +64,23 @@ gulp.task('pug', () => {
     const locals = readConfig(`${CONFIG}/meta.yml`);
     locals.versions = revLogger.versions();
     locals.basePath = BASE_PATH;
-    
+
+    const dummyData = {
+        hoge: {
+            title: 'ほげ'
+        },
+        moge: {
+            title: 'もげ'
+        }
+    };
+
     return gulp.src(`${SRC}/pug/**/[!_]*.pug`)
-        .pipe(pug({
+        .pipe(massProduction({
             locals: locals,
+            postParams: dummyData,
+            template: `${SRC}/pug/post.pug`
+        }))
+        .pipe(pug({
             pretty: true,
             basedir: `${SRC}/pug`
         }))
