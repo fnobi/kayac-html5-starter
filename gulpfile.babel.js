@@ -30,8 +30,8 @@ const DEST = `${HTDOCS}${BASE_PATH}`;
 const TEST = '.';
 
 const revLogger = new RevLogger({
-    'script.js': `${DEST}/js/script.js`,
-    'style.css': `${DEST}/css/style.css`
+    'style.css': `${DEST}/css/style.css`,
+    'script.js': `${DEST}/js/script.js`
 });
 
 
