@@ -29,7 +29,7 @@
     "browser-sync": "2.11.*",
     "browserify": "12.0.*",
     "chai": "3.5.*",
-    "gulp": "git://github.com/gulpjs/gulp.git#4.0",
+    "gulp": "4.0.0",
     "gulp-html-validator": "0.0.5",
     "gulp-instant-mocha": "^1.0.4",
     "gulp-pleeease": "2.0.*",
