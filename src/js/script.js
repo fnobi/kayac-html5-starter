@@ -1,3 +1,4 @@
+import './lib/firebaseInitializer';
 import Sample from './lib/Sample';
 import $ from 'jquery';
 
