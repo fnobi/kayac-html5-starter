@@ -38,10 +38,10 @@ module.exports = {
             "error",
             "never"
         ],
+        "key-spacing": [
+            "error"
+        ]
     },
     "globals": {
-        firebase: true,
-        process: true,
-        atom: true
     }
 };

@@ -11,6 +11,7 @@ import watchify from 'watchify';
 import browserify from 'browserify';
 import babelify from 'babelify';
 import pug from 'gulp-pug';
+import eslint from 'gulp-eslint';
 import browserSync from 'browser-sync';
 import readConfig from 'read-config';
 import watch from 'gulp-watch';
@@ -26,7 +27,7 @@ const DEST = `${HTDOCS}${BASE_PATH}`;
 
 const revLogger = new RevLogger({
     'style.css': `${DEST}/css/style.css`,
-    'script.js': `${DEST}/js/script.js`
+    'script.js': `${DEST}/js/script.js`,
 });
 
 
@@ -51,11 +52,11 @@ gulp.task('css', gulp.series('sass'));
         return watchify(browserify(`${SRC}/js/script.js`, option))
             .transform(babelify)
             .bundle()
-            .on("error", function(err) {
+            .on('error', function(err) {
                 gutil.log(err.message);
                 gutil.log(err.codeFrame);
                 this.emit('end');
-            })           
+            })
             .pipe(source('script.js'))
             .pipe(gulp.dest(`${DEST}/js`));
     });
@@ -68,14 +69,14 @@ gulp.task('pug', () => {
     const locals = {
         meta: readConfig(`${CONFIG}/meta.yml`),
         versions: revLogger.versions(),
-        basePath: BASE_PATH
+        basePath: BASE_PATH,
     };
 
     return gulp.src(`${SRC}/pug/**/[!_]*.pug`)
         .pipe(pug({
             locals: locals,
             pretty: true,
-            basedir: `${SRC}/pug`
+            basedir: `${SRC}/pug`,
         }))
         .pipe(gulp.dest(`${DEST}`));
 });
@@ -83,24 +84,35 @@ gulp.task('pug', () => {
 gulp.task('html', gulp.series('pug'));
 
 
+// lint
+gulp.task('lint', () => {
+    return gulp.src(`${SRC}/js/**/*.{js,vue}`)
+        .pipe(eslint({
+            configFile: '.eslintrc.js',
+        }))
+        .pipe(eslint.format())
+        .pipe(eslint.failOnError());
+});
+
+
 // serve
 gulp.task('browser-sync', () => {
     browserSync({
         server: {
-            baseDir: HTDOCS
+            baseDir: HTDOCS,
         },
         startPath: `${BASE_PATH}/`,
-        ghostMode: false
+        ghostMode: false,
     });
 
     watch([`${SRC}/scss/**/*.scss`], gulp.series('sass', browserSync.reload));
     watch([`${SRC}/js/**/*.js`], gulp.series('watchify', browserSync.reload));
     watch([
         `${SRC}/pug/**/*.pug`,
-        `${SRC}/config/meta.yml`
+        `${SRC}/config/meta.yml`,
     ], gulp.series('pug', browserSync.reload));
 
-    revLogger.watch((changed) => {
+    revLogger.watch(() => {
         gulp.series('pug', browserSync.reload)();
     });
 });
