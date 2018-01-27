@@ -26,6 +26,8 @@
     "babelify": "7.2.*",
     "browser-sync": "2.11.*",
     "browserify": "12.0.*",
+    "eslint": "^4.16.0",
+    "eslint-plugin-html": "^4.0.2",
     "gulp": "git://github.com/gulpjs/gulp.git#4.0",
     "gulp-pleeease": "2.0.*",
     "gulp-pug": "^3.0.3",
