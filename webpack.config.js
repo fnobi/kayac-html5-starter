@@ -34,6 +34,22 @@ const htmlTemplates = (() =>{
   })
 })()
 
+const styleLoaders = [
+    {
+        loader: 'css-loader',
+        options: {
+            importLoaders: 2,
+        }
+    },
+    'postcss-loader',
+    {
+        loader: 'sass-loader',
+        options: {
+            includePaths: [ 'src/scss' ],
+        },
+    }
+];
+
 const webpackConfig = {
     // エントリーファイル
     entry: {
@@ -48,6 +64,26 @@ const webpackConfig = {
     module: {
         // 各ファイル形式ごとのビルド設定
         rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                options: {
+                    loaders: {
+                        scss: [
+                            'vue-style-loader',
+                            ...styleLoaders,
+                        ],
+                    },
+                    cssSourceMap: true,
+                    cacheBusting: true,
+                    transformToRequire: {
+                        video: ['src', 'poster'],
+                        source: 'src',
+                        img: 'src',
+                        image: 'xlink:href'
+                    }
+                }
+            },
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
@@ -84,16 +120,7 @@ const webpackConfig = {
             {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
-                use: [
-                    {
-                    loader: 'css-loader',
-                    options: {
-                        importLoaders: 2,
-                    }
-                    },
-                    'postcss-loader',
-                    'sass-loader'
-                ]
+                use: styleLoaders
                 })
             },
             {
@@ -113,6 +140,9 @@ const webpackConfig = {
     // 拡張子省略時のpath解決
     resolve: {
         extensions: ['.js', '.json', '*'],
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js',
+        }
     },
 
     plugins: [
