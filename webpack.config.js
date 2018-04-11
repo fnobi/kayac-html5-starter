@@ -45,7 +45,7 @@ const styleLoaders = [
     {
         loader: 'sass-loader',
         options: {
-            includePaths: [ 'src/scss' ],
+            includePaths: [ `${SRC}/scss` ],
         },
     }
 ];
@@ -142,6 +142,7 @@ const webpackConfig = {
         extensions: ['.js', '.json', '*'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
+            '@': `${SRC}/scss`,
         }
     },
 
