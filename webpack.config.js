@@ -120,7 +120,7 @@ const webpackConfig = {
             {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
-                use: styleLoaders
+                    use: styleLoaders
                 })
             },
             {
