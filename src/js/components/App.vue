@@ -1,6 +1,6 @@
 <template lang="pug">
 .app
-  router-view
+    router-view
 </template>
 
 <style lang="scss" scoped>
@@ -8,6 +8,6 @@
 
 <script>
 export default {
-  name: 'app',
+    name: 'app',
 };
 </script>
