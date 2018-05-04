@@ -3,7 +3,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "common";
+@import 'common';
 .top {
     margin: 1em;
     padding: 1em;
