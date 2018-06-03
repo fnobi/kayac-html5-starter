@@ -1,8 +1,8 @@
-import { BASE_DIR } from '../constants.yml'
 import Sample from '@/lib/Sample';
+import { BASE_DIR } from '../constants.yml';
 
 const sample = new Sample({
-    name: 'world'
+    name: 'world',
 });
 
 document.querySelector('.wrapper').addEventListener('click', () => {
