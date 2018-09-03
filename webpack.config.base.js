@@ -1,32 +1,26 @@
-'use strict'
-
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const routeDataMapper = require('webpack-route-data-mapper')
-const readConfig = require('read-config')
-const path = require('path')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const routeDataMapper = require('webpack-route-data-mapper');
+const readConfig = require('read-config');
+const formatter = require('eslint-friendly-formatter');
+const path = require('path');
 
 // base config
-const SRC = './src'
-const DEST = './public'
-const HOST = process.env.HOST || '0.0.0.0'
-const PORT = process.env.PORT || 3000
+const SRC = './src';
+const DEST = './public';
+const HOST = process.env.HOST || '0.0.0.0';
+const PORT = process.env.PORT || 3000;
 
-const constants = readConfig(`${SRC}/constants.yml`)
-const { BASE_DIR } = constants
-
+const constants = readConfig(`${SRC}/constants.yml`);
+const { BASE_DIR } = constants;
 
 // page/**/*.pug -> dist/**/*.html
 const htmlTemplates = routeDataMapper({
     baseDir: `${SRC}/pug/page`,
     src: '**/[!_]*.pug',
-    locals: Object.assign(
-        {},
-        constants,
-        {
-            meta: readConfig(`${SRC}/pug/meta.yml`)
-        }
-    )
-})
+    locals: Object.assign({}, constants, {
+        meta: readConfig(`${SRC}/pug/meta.yml`),
+    }),
+});
 
 module.exports = {
     // エントリーファイル
@@ -49,9 +43,9 @@ module.exports = {
                 enforce: 'pre',
                 include: ['src'],
                 options: {
-                    formatter: require('eslint-friendly-formatter'),
-                    emitWarning: false
-                }
+                    formatter,
+                    emitWarning: false,
+                },
             },
             {
                 test: /\.js$/,
@@ -60,7 +54,7 @@ module.exports = {
                 options: {
                     compact: true,
                     cacheDirectory: true,
-                }
+                },
             },
             {
                 test: /\.pug$/,
@@ -70,16 +64,16 @@ module.exports = {
                         options: {
                             root: path.resolve(`${SRC}/pug/`),
                             pretty: true,
-                        }
-                    }
+                        },
+                    },
                 ],
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/,
                 loader: 'file-loader',
                 options: {
-                    name: '[path][name].[ext]'
-                }
+                    name: '[path][name].[ext]',
+                },
             },
             {
                 test: /\.scss$/,
@@ -89,23 +83,23 @@ module.exports = {
                             loader: 'css-loader',
                             options: {
                                 importLoaders: 2,
-                            }
+                            },
                         },
                         'postcss-loader',
                         {
                             loader: 'sass-loader',
                             options: {
-                                includePaths: [ `${SRC}/scss` ],
+                                includePaths: [`${SRC}/scss`],
                             },
-                        }
-                    ]
-                })
+                        },
+                    ],
+                }),
             },
             {
                 test: /.ya?ml$/,
                 loader: 'js-yaml-loader',
-            }
-        ]
+            },
+        ],
     },
     // webpack-dev-serverの設定
     devServer: {
@@ -121,13 +115,13 @@ module.exports = {
         extensions: ['.js', '.json', '*'],
         alias: {
             '@': path.join(__dirname, SRC, 'js'),
-        }
+        },
     },
 
     plugins: [
         // 複数のHTMLファイルを出力する
         ...htmlTemplates,
         // style.cssを出力
-        new ExtractTextPlugin('[name]')
+        new ExtractTextPlugin('[name]'),
     ],
-}
+};
