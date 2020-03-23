@@ -54,6 +54,14 @@ module.exports = (env, argv) => {
                     exclude: /(node_modules)/
                 },
                 {
+                    test: /\.(js|ts)$/,
+                    loader: "eslint-loader",
+                    enforce: "pre",
+                    options: {
+                      fix: true
+                    }
+                },
+                {
                     test: /\.pug$/,
                     use: [
                         {
