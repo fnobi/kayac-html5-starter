@@ -99,7 +99,8 @@ module.exports = {
     devServer: {
         host: HOST,
         port: PORT,
-        contentBase: DEST
+        contentBase: DEST,
+        openPage: path.relative('/', BASE_DIR),
     },
     // キャシュ有効化
     cache: true,
