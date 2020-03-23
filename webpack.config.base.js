@@ -1,6 +1,6 @@
 'use strict'
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const routeDataMapper = require('webpack-route-data-mapper')
 const readConfig = require('read-config')
 const path = require('path')
@@ -8,12 +8,12 @@ const path = require('path')
 // base config
 const SRC = './src'
 const DEST = './public'
+const ASSETS = '_assets'
 const HOST = process.env.HOST || '0.0.0.0'
 const PORT = process.env.PORT || 3000
 
 const constants = readConfig(`${SRC}/constants.yml`)
 const { BASE_DIR } = constants
-
 
 // page/**/*.pug -> dist/**/*.html
 const htmlTemplates = routeDataMapper({
@@ -31,14 +31,13 @@ const htmlTemplates = routeDataMapper({
 module.exports = {
     // エントリーファイル
     entry: {
-        'js/script.js': `${SRC}/js/script.ts`,
-        'css/style.css': `${SRC}/scss/style.scss`,
+        'main': `${SRC}/js/script.ts`
     },
     // 出力するディレクトリ・ファイル名などの設定
     output: {
         path: path.resolve(__dirname, DEST + BASE_DIR),
-        filename: '[name]',
-        publicPath: BASE_DIR,
+        filename: `${ASSETS}/[name]-[contentHash].js`,
+        publicPath: path.resolve(BASE_DIR),
     },
     module: {
         // 各ファイル形式ごとのビルド設定
@@ -64,30 +63,28 @@ module.exports = {
                 test: /\.(jpe?g|png|gif|svg)$/,
                 loader: 'file-loader',
                 options: {
-                    publicPath: `${BASE_DIR}assets`,
-                    outputPath: path.resolve(__dirname, DEST, BASE_DIR, 'assets'),
-
+                    publicPath: `${BASE_DIR}${ASSETS}/images`,
+                    outputPath: `${ASSETS}/images`
                 }
             },
             {
                 test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 2,
-                            }
-                        },
-                        'postcss-loader',
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                includePaths: [ `${SRC}/scss` ],
-                            },
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2,
                         }
-                    ]
-                })
+                    },
+                    'postcss-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            includePaths: [ `${SRC}/scss` ],
+                        },
+                    }
+                ]
             },
             {
                 test: /.ya?ml$/,
@@ -112,11 +109,11 @@ module.exports = {
             '@': path.join(__dirname, SRC, 'js')
         }
     },
-
     plugins: [
-        // 複数のHTMLファイルを出力する
-        ...htmlTemplates,
-        // style.cssを出力
-        new ExtractTextPlugin('[name]')
+        new MiniCssExtractPlugin({
+            filename: `${ASSETS}/[name]-[contentHash].css`,
+            publicPath: `${BASE_DIR}${ASSETS}`
+        }),
+        ...htmlTemplates
     ],
 }

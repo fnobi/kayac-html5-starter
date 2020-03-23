@@ -1,6 +1,8 @@
 import { BASE_DIR } from '~/constants.yml';
 import Sample from '@/lib/Sample';
 
+import '~/scss/style.scss';
+
 const sample = new Sample({
     name: 'world'
 });
