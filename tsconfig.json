@@ -6,7 +6,6 @@
       "esnext",
       "dom"
     ],
-    "jsx": "preserve",
     "moduleResolution": "node",
     "rootDirs": [ "./src" ],
     "forceConsistentCasingInFileNames": false,
@@ -16,13 +15,15 @@
     "noUnusedLocals": true,
     "baseUrl": ".",
     "paths": {
+      "~/*": [
+        "src/*"
+      ],
       "@/*": [
         "src/js/*"
       ]
     },
     "allowJs": true,
     "skipLibCheck": true,
-    "noEmit": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true
@@ -31,7 +32,6 @@
     "node_modules"
   ],
   "include": [
-    "next-env.d.ts",
     "**/*.ts"
   ]
 }
