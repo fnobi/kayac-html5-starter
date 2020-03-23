@@ -31,7 +31,7 @@ const htmlTemplates = routeDataMapper({
 module.exports = {
     // エントリーファイル
     entry: {
-        'js/script.js': `${SRC}/js/script.js`,
+        'js/script.js': `${SRC}/js/script.ts`,
         'css/style.css': `${SRC}/scss/style.scss`,
     },
     // 出力するディレクトリ・ファイル名などの設定
@@ -44,13 +44,9 @@ module.exports = {
         // 各ファイル形式ごとのビルド設定
         rules: [
             {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /(node_modules)/,
-                options: {
-                    compact: true,
-                    cacheDirectory: true,
-                }
+                test: /\.ts$/,
+                loader: 'ts-loader',
+                exclude: /(node_modules)/
             },
             {
                 test: /\.pug$/,
@@ -108,7 +104,7 @@ module.exports = {
     cache: true,
     // 拡張子省略時のpath解決
     resolve: {
-        extensions: ['.js', '.json', '*'],
+        extensions: ['.ts', '.js', '.json', '*'],
         alias: {
             '@': path.join(__dirname, SRC, 'js'),
         }
