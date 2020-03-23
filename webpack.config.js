@@ -32,7 +32,8 @@ const htmlTemplates = routeDataMapper({
 })
 
 module.exports = (env, argv) => {
-    const ASSET_ORIGIN = argv.mode == 'production' && ASSET_REMOTE ? ASSET_REMOTE : BASE_DIR;
+    const isProduction = argv.mode == 'production';
+    const assetOrigin = isProduction && ASSET_REMOTE ? ASSET_REMOTE : BASE_DIR;
     return {
         // エントリーファイル
         entry: {
@@ -42,7 +43,7 @@ module.exports = (env, argv) => {
         output: {
             path: path.resolve(__dirname, DEST + BASE_DIR),
             filename: `${ASSETS_DIR}/[name]-[contentHash].js`,
-            publicPath: ASSET_ORIGIN
+            publicPath: assetOrigin
         },
         module: {
             // 各ファイル形式ごとのビルド設定
@@ -59,7 +60,7 @@ module.exports = (env, argv) => {
                             loader: 'pug-loader',
                             options: {
                                 root: path.resolve(`${SRC}/pug/`),
-                                pretty: true,
+                                pretty: !isProduction,
                             }
                         }
                     ],
@@ -68,7 +69,7 @@ module.exports = (env, argv) => {
                     test: /\.(jpe?g|png|gif|svg)$/,
                     loader: 'file-loader',
                     options: {
-                        publicPath: `${ASSET_ORIGIN}${ASSETS_DIR}/images`,
+                        publicPath: `${assetOrigin}${ASSETS_DIR}/images`,
                         outputPath: `${ASSETS_DIR}/images`
                     }
                 },
