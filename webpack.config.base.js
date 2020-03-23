@@ -64,7 +64,9 @@ module.exports = {
                 test: /\.(jpe?g|png|gif|svg)$/,
                 loader: 'file-loader',
                 options: {
-                    name: '[path][name].[ext]'
+                    publicPath: `${BASE_DIR}assets`,
+                    outputPath: path.resolve(__dirname, DEST, BASE_DIR, 'assets'),
+
                 }
             },
             {
