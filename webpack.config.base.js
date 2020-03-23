@@ -8,12 +8,14 @@ const path = require('path')
 // base config
 const SRC = './src'
 const DEST = './public'
-const ASSETS = '_assets'
+const ASSETS_DIR = '_assets'
 const HOST = process.env.HOST || '0.0.0.0'
 const PORT = process.env.PORT || 3000
 
 const constants = readConfig(`${SRC}/constants.yml`)
 const { BASE_DIR } = constants
+
+const ASSET_ORIGIN = BASE_DIR;
 
 // page/**/*.pug -> dist/**/*.html
 const htmlTemplates = routeDataMapper({
@@ -36,8 +38,8 @@ module.exports = {
     // 出力するディレクトリ・ファイル名などの設定
     output: {
         path: path.resolve(__dirname, DEST + BASE_DIR),
-        filename: `${ASSETS}/[name]-[contentHash].js`,
-        publicPath: path.resolve(BASE_DIR),
+        filename: `${ASSETS_DIR}/[name]-[contentHash].js`,
+        publicPath: ASSET_ORIGIN
     },
     module: {
         // 各ファイル形式ごとのビルド設定
@@ -63,8 +65,8 @@ module.exports = {
                 test: /\.(jpe?g|png|gif|svg)$/,
                 loader: 'file-loader',
                 options: {
-                    publicPath: `${BASE_DIR}${ASSETS}/images`,
-                    outputPath: `${ASSETS}/images`
+                    publicPath: `${ASSET_ORIGIN}${ASSETS_DIR}/images`,
+                    outputPath: `${ASSETS_DIR}/images`
                 }
             },
             {
@@ -111,8 +113,7 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: `${ASSETS}/[name]-[contentHash].css`,
-            publicPath: `${BASE_DIR}${ASSETS}`
+            filename: `${ASSETS_DIR}/[name]-[contentHash].css`
         }),
         ...htmlTemplates
     ],
