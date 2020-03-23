@@ -1,5 +1,6 @@
 'use strict'
 
+const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const routeDataMapper = require('webpack-route-data-mapper')
 const readConfig = require('read-config')
@@ -7,7 +8,8 @@ const path = require('path')
 
 // base config
 const SRC = './src'
-const DEST = './public'
+const DEST = './dist'
+const PUBLIC = './public'
 const ASSETS_DIR = '_assets'
 const HOST = process.env.HOST || '0.0.0.0'
 const PORT = process.env.PORT || 3000
@@ -112,6 +114,7 @@ module.exports = (env, argv) => {
             }
         },
         plugins: [
+            new CopyPlugin([{ from: PUBLIC }]),
             new MiniCssExtractPlugin({
                 filename: `${ASSETS_DIR}/[name]-[contentHash].css`
             }),
