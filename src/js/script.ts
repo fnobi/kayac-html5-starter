@@ -1,5 +1,5 @@
-import { BASE_DIR } from "~/constants.yml";
 import Sample from "@/lib/Sample";
+import { BASE_DIR } from "~/constants.yml";
 
 import "~/scss/style.scss";
 
