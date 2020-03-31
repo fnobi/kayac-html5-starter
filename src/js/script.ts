@@ -4,7 +4,7 @@ import { BASE_DIR } from "~/constants.yml";
 import "~/scss/style.scss";
 
 const sample = new Sample({
-  name: "world",
+  name: "world"
 });
 
 const wrapper = document.querySelector(".wrapper");
