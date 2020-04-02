@@ -6,7 +6,7 @@
       "esnext",
       "dom"
     ],
-    "jsx": "react",
+    "jsx": "preserve",
     "moduleResolution": "node",
     "rootDirs": [ "./src" ],
     "forceConsistentCasingInFileNames": false,
