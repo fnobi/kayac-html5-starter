@@ -6,6 +6,7 @@
       "esnext",
       "dom"
     ],
+    "jsx": "react",
     "moduleResolution": "node",
     "rootDirs": [ "./src" ],
     "forceConsistentCasingInFileNames": false,
@@ -32,6 +33,7 @@
     "node_modules"
   ],
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "**/*.tsx"
   ]
 }
