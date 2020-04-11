@@ -15,28 +15,28 @@ const ASSETS_DIR = '_assets'
 const HOST = process.env.HOST || '0.0.0.0'
 const PORT = process.env.PORT || 3000
 
-const constants = readConfig(`${SRC}/constants.yml`)
-const { BASE_DIR, ASSET_REMOTE } = constants
+module.exports = (env, argv) => {
+    const constants = {
+        ...readConfig(`${SRC}/constants.yml`),
+        ...process.env
+    };
+    const { BASE_DIR, ASSET_REMOTE } = constants
+    const isProduction = argv.mode == 'production';
+    const assetOrigin = isProduction && ASSET_REMOTE ? ASSET_REMOTE : BASE_DIR;
 
-// page/**/*.pug -> dist/**/*.html
-const htmlTemplates = routeDataMapper({
-    baseDir: `${SRC}/pug/page`,
-    src: '**/[!_]*.pug',
-    locals: Object.assign(
-        {},
-        constants,
-        {
+    // page/**/*.pug -> dist/**/*.html
+    const htmlTemplates = routeDataMapper({
+        baseDir: `${SRC}/pug/page`,
+        src: '**/[!_]*.pug',
+        locals: {
+            ...constants,
             meta: readConfig(`${SRC}/pug/meta.yml`),
             helper: {
                 shareHelper: require(`${SRC}/pug/helper/shareHelper`)
-            },
+            }
         }
-    )
-})
+    });
 
-module.exports = (env, argv) => {
-    const isProduction = argv.mode == 'production';
-    const assetOrigin = isProduction && ASSET_REMOTE ? ASSET_REMOTE : BASE_DIR;
     return {
         // エントリーファイル
         entry: {
