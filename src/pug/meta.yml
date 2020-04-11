@@ -7,17 +7,7 @@ description: kayac-html5-starter web page.
 # meta keywords
 keywords: []
 
+ogp_type: website
+
 # Facebookアプリのapp id（入れないとWarningが出る）
 # facebook_app_id: 99999999999
-
-# Twitter cardsの管理者として登録するアカウント（※任意）
-# twitter_card_owner: '@TwitterJP'
-
-# favicon
-# favicon_url: /favicon.ico
-
-# サイトをホーム画面に追加した際のアイコン画像
-# webclipicon_url: http://example.com/webclipicon.png
-
-# iOSにて、サイトをホーム画面に追加した際の、ステータスバーの挙動指定
-# ios_status_bar: default

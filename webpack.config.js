@@ -77,7 +77,7 @@ module.exports = (env, argv) => {
                     ],
                 },
                 {
-                    test: /\.(jpe?g|png|gif|svg|mp4|glb)$/,
+                    test: /\.(jpe?g|png|gif|svg|ico|mp4|glb)$/,
                     loader: 'file-loader',
                     options: {
                         publicPath: `${assetOrigin}${ASSETS_DIR}/images`,
