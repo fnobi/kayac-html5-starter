@@ -26,7 +26,10 @@ const htmlTemplates = routeDataMapper({
         {},
         constants,
         {
-            meta: readConfig(`${SRC}/pug/meta.yml`)
+            meta: readConfig(`${SRC}/pug/meta.yml`),
+            helper: {
+                shareHelper: require(`${SRC}/pug/helper/shareHelper`)
+            },
         }
     )
 })
@@ -74,7 +77,7 @@ module.exports = (env, argv) => {
                     ],
                 },
                 {
-                    test: /\.(jpe?g|png|gif|svg)$/,
+                    test: /\.(jpe?g|png|gif|svg|mp4|glb)$/,
                     loader: 'file-loader',
                     options: {
                         publicPath: `${assetOrigin}${ASSETS_DIR}/images`,
