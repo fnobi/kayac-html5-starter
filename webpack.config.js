@@ -52,12 +52,15 @@ module.exports = (env, argv) => {
             // 各ファイル形式ごとのビルド設定
             rules: [
                 {
-                    test: /\.ts$/,
-                    loader: 'ts-loader',
+                    test: /\.(ts|tsx)$/,
+                    use: [
+                        { loader: 'babel-loader' },
+                        { loader: 'ts-loader' }
+                    ],
                     exclude: /(node_modules)/
                 },
                 {
-                    test: /\.(js|ts)$/,
+                    test: /\.(js|ts|tsx)$/,
                     loader: "eslint-loader",
                     enforce: "pre",
                     options: {
@@ -120,7 +123,7 @@ module.exports = (env, argv) => {
         cache: true,
         // 拡張子省略時のpath解決
         resolve: {
-            extensions: ['.ts', '.js', '.json', '*'],
+            extensions: ['.ts', '.tsx', '.js', '.json', '*'],
             alias: {
                 '~': path.join(__dirname, SRC),
                 '@': path.join(__dirname, SRC, 'js')
